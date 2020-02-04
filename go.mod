@@ -1,4 +1,4 @@
-module gorm-paginator
+module github.com/matrachma/gorm-paginator
 
 go 1.13
 
