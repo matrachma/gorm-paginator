@@ -11,6 +11,7 @@ type Param struct {
 	DB      *gorm.DB
 	Page    int
 	Limit   int
+	Select  []string
 	OrderBy []string
 }
 
@@ -57,7 +58,7 @@ func Paging(p *Param, result interface{}) (Paginator, error) {
 		offset = (p.Page - 1) * p.Limit
 	}
 
-	if err := db.Limit(p.Limit).Offset(offset).Find(result).Error; err != nil {
+	if err := db.Select(p.Select).Limit(p.Limit).Offset(offset).Find(result).Error; err != nil {
 		return Paginator{}, err
 	}
 	<-done
